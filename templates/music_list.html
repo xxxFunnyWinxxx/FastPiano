@@ -1,0 +1,36 @@
+{% extends "base_page.html" %}
+
+{% block page-title %}
+Список произведений
+{% endblock %}
+
+{% block page-lead %}
+Вы можете выбрать любое произведение из списка на свой вкус и приступить к практике!
+{% endblock %}
+
+{% block content %}
+<div class="container px-4 py-5" id="data-table">
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col" class="py-3">Название</th>
+              <th scope="col" class="py-3">Автор</th>
+              <th scope="col" class="py-3">Навык</th>
+              <th scope="col" class="py-3">Уровень</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for file, author, name, purpose, level in data %}
+            <tr>
+                <td class="py-3">{{ name }}</td>
+                <td class="py-3">{{ author }}</td>
+                <td class="py-3">{{ purpose }}</td>
+                <td class="py-3">{{ level }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+</div>
+{% endblock %}

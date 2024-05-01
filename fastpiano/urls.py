@@ -21,7 +21,7 @@ from fastpiano import views
 
 urlpatterns = [
     path('', views.index),
-    path('terms-list', views.music_list),
-    path('add-term', views.play),
-    path('send-term', views.admin)
+    path('music-list', views.music_list),
+    #path('play', views.play),
+    #path('admin', views.admin)
 ]
