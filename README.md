@@ -4,6 +4,15 @@ WEB project for MIPT Python course
 
 The main goal of the project is to simplify the search for exercises for piano begginers
 
+# TODO
+- Parse score by lines and convert them to images
+- Create html pages for 'play' and 'admin'
+- Create admin page for updating database
+- Add autotests
+
+# Future ideas
+- Delete unfrequenly used scores from images
+
 # Sources of sheet music
 
 List of .xml sources from [https://www.musicxml.com/music-in-musicxml/](https://www.musicxml.com/music-in-musicxml/) :
