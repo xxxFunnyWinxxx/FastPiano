@@ -9,13 +9,17 @@ DATA_DIR = BASE_DIR / Path('content/data').resolve()
 
 
 PURPOSE_OPTS = [
-    ('', 'беглость'),
-    ('', 'октавные движения'),
-    ('', '')
+    ('fast', 'беглость'),
+    ('octaves', 'октавные движения')
 ]
 
 LEVEL_OPTS = [
     ('easy', 'легкий'),
     ('medium', 'средний'),
     ('hard', 'сложный')
+]
+
+SOURCE_OPTS = [
+    ('data', 'data'),
+    ('pdf', 'pdf')
 ]
