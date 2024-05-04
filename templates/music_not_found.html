@@ -1,0 +1,16 @@
+{% extends "base_page.html" %}
+
+{% block page-title %}
+Композиция не найдена
+{% endblock %}
+
+{% block page-lead %}
+{{ message }} <br/>
+Композиции с данными параметрами на данный момент нет в базе.
+Указанные параметры: 
+<ul>
+    {% for key, value in params.items %}
+    <li>{{ key }}: {{ value }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

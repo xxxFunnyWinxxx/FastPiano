@@ -21,16 +21,26 @@ def music_list(request):
     return render(request, "music_list.html", context={"data": data})
 
 def play(request):
-    return render(request, "play.html")
+    return render(request, "play.html", context={"purpose_opts": PURPOSE_OPTS, "level_opts": LEVEL_OPTS})
 
 def show(request):
-    file = request.GET.get("file")
-    level = request.GET.get("level")
-    purpose = request.GET.get("purpose")
+    if request.method == "POST":
+        cache.clear()
+        file = request.POST.get("file")
+        level = request.POST.get("level")
+        purpose = request.POST.get("purpose")
+    else:
+        file = request.GET.get("file")
+        level = request.GET.get("level")
+        purpose = request.GET.get("purpose")
+
     if file:
         pdf_file = get_pdf_from_file(file)
     elif level and purpose:
+        logger.debug(f"Purpose: {purpose}, level: {level}")
         pdf_file = get_pdf_from_file(get_random_file(purpose, level))
+        if pdf_file == None:
+            return render(request, "music_not_found.html", context = {"params":{"purpose": purpose, "level": level}})
     else:
         logger.warning(f"Incorrect request file: {file}, purpose: {purpose}, level: {level}")
         index(request)
@@ -57,9 +67,9 @@ def add_music(request):
         if file and name and author and purpose and level and source:
             append_data(file, author, name, purpose, level, source)
             context["message"] = "Произведение успешно добавлено!"
-            return render(request, "add_request.html", context)
+            return render(request, "add_music.html", context)
         else:
             context["message"] = "Одно из полей не было заполнено. Произведение не добавлено"
-            return render(request, "add_request.html", context)
+            return render(request, "add_music.html", context)
     else:
         admin(request)

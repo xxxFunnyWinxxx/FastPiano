@@ -9,8 +9,35 @@ Cлучайный этюд
 {% endblock %}
 
 {% block content %}
-
-
-
-
+<form method="post">
+    <table>
+        <thead>
+            <tr>
+                <th>Навык</th>
+                <th>Уровень</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <select name="purpose" id="purpose">
+                        {% for opt, name in purpose_opts %}
+                        <option value="{{ opt }}">{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select name="level" id="level">
+                        {% for opt, name in level_opts %}
+                        <option value="{{ opt }}">{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <button type="submit" formaction="/show">Играть</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
 {% endblock %}
