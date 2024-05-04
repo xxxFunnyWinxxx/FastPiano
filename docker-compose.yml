@@ -1,0 +1,4 @@
+services:
+  my_server:
+    build: .
+    container_name: fastpiano

@@ -4,14 +4,17 @@ WEB project for MIPT Python course
 
 The main goal of the project is to simplify the search for exercises for piano begginers
 
-# TODO
-- Parse score by lines and convert them to images
-- Create html pages for 'play' and 'admin'
-- Create admin page for updating database
-- Add autotests
+# Requirements
 
-# Future ideas
-- Delete unfrequenly used scores from images
+You can find Python requirements in [requirements.txt](requirements.txt).
+
+Also you need to download music score converter [MuseScore](https://musescore.org/ru/download) to [compilers](compilers/) directory and define right version of MuseScore in [const.py](fastpiano/const.py).
+
+
+# TODO for future...
+- Parse score by lines and convert them to images
+- Delete unfrequenly used scores from pdf/images
+- Add autotests for backend
 
 # Sources of sheet music
 
