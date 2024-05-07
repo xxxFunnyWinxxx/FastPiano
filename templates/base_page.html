@@ -6,7 +6,8 @@
     <!-- load static -->
     {% load static %}
     <!-- CSS -->
-    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap.min.css' %}" type="text/css" rel="stylesheet">
+    
 </head>
 <body>
 <main>
@@ -15,14 +16,21 @@
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                 <div class="fs-2 mb-3">
                     <img src="{% static 'piano.svg' %}" alt="Fast Piano" width="32" height="32"/>
-                    <span>Fast Piano</span>
+                    <span class="logo">Fast Piano</span>
                 </div>
             </a>
         </header>
-        <div class="p-4 mb-4 bg-light rounded-3" id="title-box">
+        <div class="menu">
+            <a href="/">Главная</a>
+            <a href="/play">Случайный этюд</a>
+            <a href="/music-list">Список произведений</a>
+            <a href="/admin">Панель администратора</a>
+        </div>
+        <div class="p-4 mb-4 bg-light rounded-3 banner" id="title-box">
             <div class="container-fluid py-5">
-                <h1 class="display-1 fw-bold">{% block page-title %}{% endblock %}</h1>
-                <p class="col-md-8 fs-4">{% block page-lead %}{% endblock %}</p>
+                <img src="{% static 'piano.svg' %}" alt="Fast Piano" width="100"/>
+                <h1 class="display-1 fw-bold logo">{% block page-title %}{% endblock %}</h1>
+                <p class="col-md-10 fs-4">{% block page-lead %}{% endblock %}</p>
             </div>
         </div>
         {% block content %}{% endblock %}

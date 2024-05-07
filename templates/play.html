@@ -5,7 +5,7 @@ Cлучайный этюд
 {% endblock %}
 
 {% block page-lead %}
-Мы подберём случайный этюд за тебя! Тебе нужно выбрать уровень сложности и что в чём ты хочешь упражнятся.
+Мы подберём подходящий этюд для тебя! Тебе нужно выбрать уровень сложности и навык, который хочешь развить.
 {% endblock %}
 
 {% block content %}
@@ -34,7 +34,7 @@ Cлучайный этюд
                     </select>
                 </td>
                 <td>
-                    <button type="submit" formaction="/show">Играть</button>
+                    <button type="submit" class="btn btn-primary btn_play" formaction="/show" >Играть</button>
                 </td>
             </tr>
         </tbody>
