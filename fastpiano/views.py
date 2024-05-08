@@ -17,12 +17,17 @@ logger.setLevel(logging.DEBUG)
 def index(request):
     return render(request, "index.html")
 
+
 def music_list(request):
     data = get_music_list()
     return render(request, "music_list.html", context={"data": data})
 
+
 def play(request):
-    return render(request, "play.html", context={"purpose_opts": PURPOSE_OPTS, "level_opts": LEVEL_OPTS})
+    return render(
+        request, "play.html", context={"purpose_opts": PURPOSE_OPTS, "level_opts": LEVEL_OPTS}
+    )
+
 
 def show(request):
     if request.method == "POST":
@@ -41,15 +46,23 @@ def show(request):
     elif level and purpose:
         logger.debug(f"Purpose: {purpose}, level: {level}")
         pdf_file = get_pdf_from_file(get_random_file(purpose, level))
-        if pdf_file == None:
-            return render(request, "music_not_found.html", context = {"params":{"purpose": purpose, "level": level}})
+        if pdf_file is None:
+            return render(
+                request,
+                "music_not_found.html",
+                context={"params": {"purpose": purpose, "level": level}},
+            )
     else:
         logger.warning(f"Incorrect request file: {file}, purpose: {purpose}, level: {level}")
         index(request)
-    return FileResponse(open(pdf_file, 'rb'), content_type='application/pdf')
+    return FileResponse(open(pdf_file, "rb"), content_type="application/pdf")
+
 
 def admin(request):
-    return render(request, "admin.html", context={"purpose_opts": PURPOSE_OPTS, "level_opts": LEVEL_OPTS})
+    return render(
+        request, "admin.html", context={"purpose_opts": PURPOSE_OPTS, "level_opts": LEVEL_OPTS}
+    )
+
 
 def add_music(request):
     if request.method == "POST":
@@ -61,36 +74,40 @@ def add_music(request):
         level = request.POST.get("level")
         password = request.POST.get("password")
 
-        if 'file' in request.FILES:
-            file = request.FILES['file']
-            if file.name.lower().endswith('.pdf'):
-                source = 'pdf'
+        if "file" in request.FILES:
+            file = request.FILES["file"]
+            if file.name.lower().endswith(".pdf"):
+                source = "pdf"
             else:
-                source = 'data'
+                source = "data"
 
-            if source == 'pdf':
+            if source == "pdf":
                 dir_to_load = PDF_DIR
-            elif source == 'data':
+            elif source == "data":
                 dir_to_load = DATA_DIR
         else:
             context = {"message": "Файл не был указан!"}
             return render(request, "add_music.html", context)
 
-        if password == PASSWORD:    
-            fs = FileSystemStorage(location = dir_to_load)
+        if password == PASSWORD:
+            fs = FileSystemStorage(location=dir_to_load)
             filename = fs.save(file.name, file)
-        else: 
+        else:
             context = {"message": "Неверный пароль!"}
             return render(request, "add_music.html", context)
 
         if filename and name and author and purpose and level and source:
             append_data(filename, author, name, purpose, level, source)
-            context = {"message": f"""Произведение успешно добавлено!
-            Файл: {filename}, название: {name}, автор: {author}, навык {purpose}, уровень {level}"""}
+            context = {
+                "message": f"""Произведение успешно добавлено!
+            Файл: {filename}, название: {name}, автор: {author}, навык {purpose}, уровень {level}"""
+            }
             return render(request, "add_music.html", context)
         else:
-            context = {"message": f"""Одно из полей не было заполнено. Произведение не добавлено
-            Файл: {filename}, название: {name}, автор: {author}, навык {purpose}, уровень {level}"""}
+            context = {
+                "message": f"""Одно из полей не было заполнено. Произведение не добавлено
+            Файл: {filename}, название: {name}, автор: {author}, навык {purpose}, уровень {level}"""
+            }
             return render(request, "add_music.html", context)
     else:
         admin(request)

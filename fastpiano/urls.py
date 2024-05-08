@@ -20,10 +20,10 @@ from django.urls import path
 from fastpiano import views
 
 urlpatterns = [
-    path('', views.index),
-    path('music-list', views.music_list),
-    path('show', views.show),
-    path('play', views.play),
-    path('admin', views.admin),
-    path('add-music', views.add_music)
+    path("", views.index),
+    path("music-list", views.music_list),
+    path("show", views.show),
+    path("play", views.play),
+    path("admin", views.admin),
+    path("add-music", views.add_music),
 ]
