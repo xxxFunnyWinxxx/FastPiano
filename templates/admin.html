@@ -10,7 +10,7 @@
 
 {% block content %}
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <table>
         <thead>
             <tr>
@@ -19,35 +19,29 @@
                 <th>Автор</th>
                 <th>Навык</th>
                 <th>Уровень</th>
-                <th>Источник</th>
+                <th>Пароль</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><input type="text" name="file" id="file"></td>
+                <td><input type="file" name="file" id="file"></td>
                 <td><input type="text" name="name" id="name"></td>
                 <td><input type="text" name="author" id="author"></td>
                 <td>
                     <select name="purpose" id="purpose">
-                        {% for opt, name in purpose_opts %}
-                        <option value="{{ opt }}">{{ name }}</option>
+                        {% for opt in purpose_opts %}
+                        <option value="{{ opt }}">{{ opt }}</option>
                         {% endfor %}
                     </select>
                 </td>
                 <td>
                     <select name="level" id="level">
-                        {% for opt, name in level_opts %}
-                        <option value="{{ opt }}">{{ name }}</option>
+                        {% for opt in level_opts %}
+                        <option value="{{ opt }}">{{ opt }}</option>
                         {% endfor %}
                     </select>
                 </td>
-                <td>
-                    <select name="source" id="source">
-                        {% for opt, name in source_opts %}
-                        <option value="{{ opt }}">{{ name }}</option>
-                        {% endfor %}
-                    </select>
-                </td>
+                <td><input type="text" name="password" id="password"></td>
             </tr>
         </tbody>
     </table>

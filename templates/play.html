@@ -21,15 +21,15 @@ Cлучайный этюд
             <tr>
                 <td>
                     <select name="purpose" id="purpose">
-                        {% for opt, name in purpose_opts %}
-                        <option value="{{ opt }}">{{ name }}</option>
+                        {% for opt in purpose_opts %}
+                        <option value="{{ opt }}">{{ opt }}</option>
                         {% endfor %}
                     </select>
                 </td>
                 <td>
                     <select name="level" id="level">
-                        {% for opt, name in level_opts %}
-                        <option value="{{ opt }}">{{ name }}</option>
+                        {% for opt in level_opts %}
+                        <option value="{{ opt }}">{{ opt }}</option>
                         {% endfor %}
                     </select>
                 </td>

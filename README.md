@@ -4,11 +4,14 @@ WEB project for MIPT Python course
 
 The main goal of the project is to simplify the search for exercises for piano begginers
 
+
 # Requirements
 
-You can find Python requirements in [requirements.txt](requirements.txt).
+You can find Python requirements in [requirements.txt](requirements.txt) and install it with command `pip install -r requirements.txt`.
 
 Also you need to download music score converter [MuseScore](https://musescore.org/ru/download) to [compilers](compilers/) directory and define right version of MuseScore in [const.py](fastpiano/const.py).
+
+For stable work of MuseScore pease install [FUSE](https://github.com/AppImage/AppImageKit/wiki/FUSE)
 
 
 # TODO for future...

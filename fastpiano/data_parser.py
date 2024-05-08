@@ -136,12 +136,21 @@ def get_pdf_from_file(file: str, pdf_dir: Path = PDF_DIR, data_dir: Path = DATA_
     pdf_file = pdf_dir / f'{Path(file).stem}.pdf' 
     data_file = data_dir / file
     if source == 'pdf':
-        if data_file.exists() and data_file.is_file():
-            return data_file
+        if pdf_file.exists() and pdf_file.is_file():
+            return pdf_file
+        else:
+            logger.warning(f"No pdf file {pdf_file}. exist {data_file.exists()}, is_file {data_file.is_file()}")
+            return None
     elif source == 'data':
         if pdf_file.exists() and pdf_file.is_file():
             return pdf_file
-        subprocess.Popen([COMPILER_FILE, '-o', pdf_file, data_file])
+        proc = subprocess.Popen(
+            [COMPILER_FILE, '-o', pdf_file, data_file],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+        out, err = proc.communicate()
+        logger.debug(f"MuseScore output: {out}, error {err}")
         return pdf_file
     else:
         logger.warning(f'Unknown source of data {source}')
