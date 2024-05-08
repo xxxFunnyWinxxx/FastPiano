@@ -61,7 +61,7 @@ def add_music(request):
         level = request.POST.get("level")
         password = request.POST.get("password")
 
-        if request.FILES['file']:
+        if 'file' in request.FILES:
             file = request.FILES['file']
             if file.name.lower().endswith('.pdf'):
                 source = 'pdf'
@@ -85,12 +85,12 @@ def add_music(request):
 
         if filename and name and author and purpose and level and source:
             append_data(filename, author, name, purpose, level, source)
-            context["message"] = f"""Произведение успешно добавлено!
-            Файл: {filename}, название: {name}, автор: {author}, навык {purpose}, уровень {level}"""
+            context = {"message": f"""Произведение успешно добавлено!
+            Файл: {filename}, название: {name}, автор: {author}, навык {purpose}, уровень {level}"""}
             return render(request, "add_music.html", context)
         else:
-            context["message"] = f"""Одно из полей не было заполнено. Произведение не добавлено
-            Файл: {filename}, название: {name}, автор: {author}, навык {purpose}, уровень {level}"""
+            context = {"message": f"""Одно из полей не было заполнено. Произведение не добавлено
+            Файл: {filename}, название: {name}, автор: {author}, навык {purpose}, уровень {level}"""}
             return render(request, "add_music.html", context)
     else:
         admin(request)
