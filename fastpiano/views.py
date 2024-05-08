@@ -72,6 +72,9 @@ def add_music(request):
                 dir_to_load = PDF_DIR
             elif source == 'data':
                 dir_to_load = DATA_DIR
+        else:
+            context = {"message": "Файл не был указан!"}
+            return render(request, "add_music.html", context)
 
         if password == PASSWORD:    
             fs = FileSystemStorage(location = dir_to_load)
@@ -79,13 +82,6 @@ def add_music(request):
         else: 
             context = {"message": "Неверный пароль!"}
             return render(request, "add_music.html", context)
-        
-        context = {"file": filename,
-                    "author": author,
-                    "name": name,
-                    "purpose": purpose,
-                    "level": level,
-                    "source": source}
 
         if filename and name and author and purpose and level and source:
             append_data(filename, author, name, purpose, level, source)
@@ -93,7 +89,7 @@ def add_music(request):
             Файл: {filename}, название: {name}, автор: {author}, навык {purpose}, уровень {level}"""
             return render(request, "add_music.html", context)
         else:
-            context["message"] = """Одно из полей не было заполнено. Произведение не добавлено
+            context["message"] = f"""Одно из полей не было заполнено. Произведение не добавлено
             Файл: {filename}, название: {name}, автор: {author}, навык {purpose}, уровень {level}"""
             return render(request, "add_music.html", context)
     else:
